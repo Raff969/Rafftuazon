@@ -1,0 +1,407 @@
+    <!DOCTYPE html>
+    <html lang="id">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio RafDev</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+    *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* ===== BACKGROUND CINEMATIC ===== */
+    body{
+    min-height:100vh;
+    color:#fff;
+    background:
+        radial-gradient(circle at top,#10162f 0%,#070b18 40%,#02040a 100%);
+    overflow-x:hidden;
+    }
+
+    /* DEPTH LAYER */
+    body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:
+        radial-gradient(circle at 25% 30%,rgba(80,110,255,.15),transparent 45%),
+        radial-gradient(circle at 75% 70%,rgba(60,90,220,.2),transparent 50%);
+    animation:bgPulse 14s ease-in-out infinite;
+    z-index:-1;
+    }
+
+    @keyframes bgPulse{
+    0%,100%{opacity:.6}
+    50%{opacity:1}
+    }
+
+    /* ===== GLOBAL FIX (ANTI HILANG) ===== */
+    header,
+    .hero,
+    section,
+    footer{
+    position:relative;
+    z-index:2;
+    }
+
+    /* ===== GRADIENT TEXT ===== */
+    .gradient-move{
+    background:linear-gradient(270deg,#6f8cff,#9db5ff,#6f8cff);
+    background-size:600% 600%;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:gradientMove 7s ease infinite;
+    }
+
+    @keyframes gradientMove{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+    }
+
+    /* ===== NAVBAR ===== */
+    header{
+    padding:32px 10%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    }
+
+    header h1{font-size:26px;font-weight:800;}
+
+    nav{display:flex;gap:32px;}
+
+    nav a{
+    color:#cfd8ff;
+    text-decoration:none;
+    font-size:15px;
+    position:relative;
+    }
+
+    nav a::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:-6px;
+    width:0;
+    height:2px;
+    background:#6f8cff;
+    transition:.3s;
+    }
+
+    nav a:hover{color:#fff}
+    nav a:hover::after{width:100%}
+
+    /* ===== HERO ===== */
+    .hero{
+    padding:140px 10% 100px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:80px;
+    align-items:center;
+    }
+
+    .hero h2{
+    font-size:42px;
+    line-height:1.3;
+    }
+
+    .hero p{
+    margin-top:18px;
+    color:#b8c3ff;
+    line-height:1.9;
+    max-width:520px;
+    }
+
+    /* SOCIAL */
+    .social-links{
+    margin-top:28px;
+    display:flex;
+    gap:14px;
+    flex-wrap:wrap;
+    }
+
+    .social-links a{
+    padding:12px 24px;
+    border-radius:999px;
+    background:linear-gradient(135deg,#4f6cff,#7fa0ff);
+    color:#020617;
+    font-weight:700;
+    font-size:14px;
+    text-decoration:none;
+    transition:.35s;
+    box-shadow:0 0 35px rgba(100,130,255,.6);
+    }
+
+    .social-links a:hover{
+    transform:translateY(-4px);
+    box-shadow:0 0 70px rgba(120,150,255,.9);
+    }
+
+    /* ===== PROFILE ORBIT ===== */
+    .profile-orbit{
+        position:relative;
+        width:420px;
+        height:420px;
+        margin:auto;
+        }
+
+
+    .profile-img{
+    width:320px;
+    height:320px;
+    border-radius:50%;
+    object-fit:cover;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:linear-gradient(135deg,#4f6cff,#7fa0ff);
+    padding:5px;
+    box-shadow:
+        0 0 45px rgba(100,130,255,.7),
+        0 0 90px rgba(100,130,255,.4);
+    z-index:5;
+    }
+
+    /* ORBIT ICON */
+    .orbit{
+    position:absolute;
+    inset:0;
+    animation:spin 22s linear infinite;
+    }
+
+    @keyframes spin{
+    from{transform:rotate(0deg)}
+    to{transform:rotate(360deg)}
+    }
+
+    .orbit i{
+    position:absolute;
+    top:50%;
+    left:50%;
+    font-size:30px;
+    z-index:2;
+
+    transform:
+        rotate(calc(36deg * var(--i)))
+        translate(230px) /* ⬅️ JARAK DARI FOTO */
+        rotate(calc(-36deg * var(--i)));
+
+    filter:drop-shadow(0 0 8px currentColor);
+    }
+
+
+    /* ICON COLORS */
+    .fa-html5{color:#e34f26}
+    .fa-css3-alt{color:#1572b6}
+    .fa-js{color:#f7df1e}
+    .fa-figma{color:#f24e1e}
+    .fa-react{color:#61dafb}
+    .fa-php{color:#777bb4}
+    .fa-laravel{color:#ff2d20}
+    .fa-git-alt{color:#f34f29}
+    .fa-github{color:#fff}
+    .fa-image{color:#31a8ff}
+
+    /* ===== ABOUT ===== */
+    #about{
+    padding:90px 10%;
+    background:linear-gradient(
+        180deg,
+        rgba(10,15,35,.65),
+        rgba(5,8,20,.9)
+    );
+    border-radius:32px;
+    box-shadow:0 40px 100px rgba(0,0,0,.6);
+    }
+
+    #about h3{
+    font-size:34px;
+    margin-bottom:24px;
+    }
+
+    #about p{
+    color:#cfd8ff;
+    line-height:1.9;
+    max-width:720px;
+    margin-bottom:18px;
+    }
+
+    /* SKILLS */
+    .skills{
+    margin-top:28px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    }
+
+    .skill{
+    padding:12px 22px;
+    border-radius:999px;
+    background:linear-gradient(135deg,#0f1535,#1c254d);
+    border:1px solid rgba(120,150,255,.25);
+    font-size:14px;
+    font-weight:600;
+    color:#dbe3ff;
+    }
+
+    /* ===== PROJECTS ===== */
+    #projects{
+    padding:100px 10%;
+    }
+
+    #projects h3{
+    font-size:32px;
+    margin-bottom:28px;
+    }
+
+    .projects{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:32px;
+    }
+
+    .project-item{
+    background:linear-gradient(160deg,#080d25,#121b3f);
+    padding:18px;
+    border-radius:24px;
+    transition:.4s;
+    }
+
+    .project-item:hover{
+    transform:translateY(-8px);
+    box-shadow:0 30px 70px rgba(0,0,0,.7);
+    }
+
+    .project-item img{
+    width:100%;
+    border-radius:16px;
+    }
+
+    .project-item h4{margin-top:12px;}
+    .project-item p{color:#b8c3ff;font-size:14px;}
+
+    /* ===== FOOTER ===== */
+    footer{
+    padding:40px;
+    text-align:center;
+    color:#8894d8;
+    }
+
+    @media(max-width:900px){
+    .hero{grid-template-columns:1fr;text-align:center;}
+    }
+    </style>
+    </head>
+
+    <body>
+
+    <header>
+    <h1 class="gradient-move">RafDev</h1>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+    </nav>
+    </header>
+
+    <section class="hero">
+    <div>
+        <h2>Hi, I'm <span class="gradient-move">Raff</span><br>Web & UI Designer</h2>
+        <p>Creating modern cinematic interfaces with refined gradients and premium visual depth.</p>
+
+        <div class="social-links">
+        <a href="#">Instagram</a>
+        <a href="#">WhatsApp</a>
+        <a href="#">TikTok</a>
+        <a href="#">Email</a>
+        </div>
+    </div>
+
+    <div class="profile-orbit">
+        <img src="assets/Raff.webp" class="profile-img">
+        <div class="orbit">
+        <i class="fa-brands fa-html5" style="--i:0"></i>
+        <i class="fa-brands fa-css3-alt" style="--i:1"></i>
+        <i class="fa-brands fa-js" style="--i:2"></i>
+        <i class="fa-brands fa-figma" style="--i:3"></i>
+        <i class="fa-brands fa-react" style="--i:4"></i>
+        <i class="fa-brands fa-php" style="--i:5"></i>
+        <i class="fa-brands fa-laravel" style="--i:6"></i>
+        <i class="fa-brands fa-git-alt" style="--i:7"></i>
+        <i class="fa-brands fa-github" style="--i:8"></i>
+        <i class="fa-solid fa-image" style="--i:9"></i>
+        </div>
+    </div>
+    </section>
+
+    <section id="about">
+    <h3>About Me</h3>
+    <p>
+        I am a <strong>UI/UX Designer</strong> and <strong>Frontend Developer</strong>
+        focusing on modern, clean design and premium user experience.
+    </p>
+    <p>
+        Experienced with Figma, HTML, CSS, JavaScript, PHP, Laravel,
+        and Adobe Photoshop to deliver high-quality digital products.
+    </p>
+
+    <div class="skills">
+        <div class="skill">UI / UX Design</div>
+        <div class="skill">Frontend Development</div>
+        <div class="skill">HTML & CSS</div>
+        <div class="skill">JavaScript</div>
+        <div class="skill">PHP</div>
+        <div class="skill">Laravel</div>
+        <div class="skill">Figma</div>
+        <div class="skill">Photoshop</div>
+        <div class="skill">Git & GitHub</div>
+    </div>
+    </section>
+
+
+    <section id="projects">
+    <h3>Projects</h3>
+    <div class="projects">
+
+    <div class="project-item">
+    <img src="assets/Project.png">
+    <h4>Landing Page</h4>
+    <p>Website anime dengan visual modern dan layout bersih.</p>
+    </div>
+
+    <div class="project-item">
+    <img src="assets/Screenshot 2026-01-30 070415.png">
+    <h4>UI Website</h4>
+    <p>Dashboard & e-commerce UI fokus usability dan conversion.</p>
+    </div>
+
+    <div class="project-item">
+    <img src="assets/k.jpg">
+    <h4>Mobile App</h4>
+    <p>Desain mobile app futuristik dengan UI clean.</p>
+    </div>
+
+    <div class="project-item">
+    <img src="assets/Screenshot 2026-01-19 144421.png">
+    <h4>Shopee Clone Website</h4>
+    <p>Duplikat website Shopee dengan fokus UI dan layout e-commerce.</p>
+    </div>
+
+    </div>
+    </section>
+
+    <footer>
+    © 2026 Raff • Portfolio
+    </footer>
+
+    </body>
+    </html>
+    
